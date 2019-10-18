@@ -10,7 +10,11 @@ import PlainWebChat from './PlainWebChat';
 // https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-authentication
 
 async function getDirectLineToken() {
-  const res = await fetch('https://webchat-mockbot.azurewebsites.net/directline/token', { method: 'POST' });
+  const res = await fetch('https://directline.botframework.com/v3/directline/tokens/generate', 
+    { method: 'POST',
+    headers: {
+        'Authorization': 'Bearer <KEY>'
+    } });
   const { token } = await res.json();
 
   return token;
@@ -27,30 +31,8 @@ export default () => {
   return (
     // We are using the "Composer" component here, which all descendants will have access to the Web Chat API by HOC-ing thru "connectToWebChat".
     <React.Fragment>
-      <h1>Web Chat with plain UI</h1>
-      <p>
-        This sample shows how to use Web Chat without any of its canned UI component. There are few conversation you can
-        try out.
-      </p>
-      <ol>
-        <li>
-          Say <code>image</code> to the bot
-        </li>
-        <li>
-          Say <code>suggested-actions</code> to the bot
-        </li>
-        <li>
-          Say <code>card bingsports</code> to the bot
-        </li>
-      </ol>
-      <p>
-        For the{' '}
-        <a href="https://github.com/microsoft/BotFramework-WebChat/tree/master/samples/21.customization-plain-ui/">
-          source code of this demo
-        </a>
-        , please visit <a href="https://github.com/microsoft/BotFramework-WebChat/">our GitHub repository</a>.
-      </p>
-      <hr />
+      <h1>Op Avontuur!</h1>
+      <p>Hi! Wat leuk dat je op avontuur wil! Begin je avontuur door iets te zeggen in het tekstveld hieronder.</p>
       {!!directLine && (
         <Components.Composer directLine={directLine}>
           <PlainWebChat />
